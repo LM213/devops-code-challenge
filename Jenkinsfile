@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        AWS_REGION     = "us-east-1"   // change if needed
-        AWS_ACCOUNT_ID = "135808924575"
+        AWS_REGION     = "us-east-1"          // Change if needed
+        AWS_ACCOUNT_ID = "135808924575"       // Your AWS account ID
         FRONTEND_REPO  = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/ecs-challenge-frontend"
         BACKEND_REPO   = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/ecs-challenge-backend"
     }
@@ -26,7 +26,7 @@ pipeline {
 
                     echo "🔑 Logging into Amazon ECR..."
                     aws ecr get-login-password --region $AWS_REGION | \
-                    docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+                    docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
                     """
                 }
             }
